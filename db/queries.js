@@ -14,7 +14,7 @@ const getNewAdditions = async () => {
       [row.id],
     );
 
-    games.append({ ...row, ...formatRelations(gameInfo.rows) });
+    games.push({ ...row, ...formatRelations(gameInfo.rows) });
   }
 
   return games;
@@ -37,7 +37,7 @@ const getAllGames = async () => {
       [row.id],
     );
 
-    games.append({ ...row, ...formatRelations(gameInfo.rows) });
+    games.push({ ...row, ...formatRelations(gameInfo.rows) });
   }
 
   return games;
@@ -63,7 +63,7 @@ const getGamesByCategoryId = async (categoryId) => {
       [row.id],
     );
 
-    games.append({ ...row, ...formatRelations(gameInfo.rows) });
+    games.push({ ...row, ...formatRelations(gameInfo.rows) });
   }
 
   return games;
