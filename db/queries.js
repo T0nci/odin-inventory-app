@@ -14,17 +14,17 @@ const getNewAdditions = async () => {
       [row.id],
     );
 
-    const newRow = { ...row, ...formatRelations(gameInfo.rows) };
+    const relations = formatRelations(gameInfo.rows);
 
     games.push({
-      ...newRow,
+      ...row,
       genresString: limitStringLength(
-        newRow.genres
+        relations.genres
           .map((item) => item[0].toUpperCase() + item.slice(1))
           .join(", "),
       ),
-      developersString: limitStringLength(newRow.developers.join(", ")),
-      platformsString: limitStringLength(newRow.platforms.join(", ")),
+      developersString: limitStringLength(relations.developers.join(", ")),
+      platformsString: limitStringLength(relations.platforms.join(", ")),
     });
   }
 
