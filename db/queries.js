@@ -1,5 +1,6 @@
 const db = require("./pool");
 const CustomError = require("../utils/CustomError");
+const { formatRelations } = require("../utils/helpers");
 
 const getNewAdditions = async () => {
   const { rows } = await db.query(
@@ -13,7 +14,7 @@ const getNewAdditions = async () => {
       [row.id],
     );
 
-    games.append({ ...row, details: gameInfo });
+    games.append({ ...row, ...formatRelations(gameInfo) });
   }
 
   return games;
@@ -36,7 +37,7 @@ const getAllGames = async () => {
       [row.id],
     );
 
-    games.append({ ...row, details: gameInfo });
+    games.append({ ...row, ...formatRelations(gameInfo) });
   }
 
   return games;
@@ -62,7 +63,7 @@ const getGamesByCategoryId = async (categoryId) => {
       [row.id],
     );
 
-    games.append({ ...row, details: gameInfo });
+    games.append({ ...row, ...formatRelations(gameInfo) });
   }
 
   return games;
