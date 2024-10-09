@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - Inventory App</title>
+  </head>
+  <body>
+    <%- include("partials/navbar", { links }) %>
+    <main>
+      <header>Games<%= locals.filter && `, ${filter.type}: ${filter.category}` %></header>
+      <ul>
+        <% games.forEach((game) => { %>
+          <li>
+            <p><%= game.game %></p>
+            <p><%= game.price %>€</p>
+            <ul>
+              <% game.genres.forEach((genre) => { %>
+                <li><%= genre %></li>
+              <% }) %>
+            </ul>
+          </li>
+        <% }) %>
+      </ul>
+    </main>
+  </body>
+</html>

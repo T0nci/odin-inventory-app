@@ -44,7 +44,7 @@ const getAllGames = async () => {
   const games = [];
   for (const row of rows) {
     const gameInfo = await db.query(
-      "SELECT category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE game_id = $1",
+      "SELECT category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE type = 'genre' AND game_id = $1",
       [row.id],
     );
 
