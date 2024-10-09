@@ -1,5 +1,5 @@
 const db = require("./pool");
-const CustomError = require("../controllers/CustomError");
+const CustomError = require("../utils/CustomError");
 
 const getAllCategories = async () => {
   const { rows } = await db.query(
