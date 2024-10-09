@@ -7,7 +7,9 @@
   </head>
   <body>
     <%- include("partials/navbar", { links }) %>
-    <header>Error</header>
-    <p><%= err.statusCode %>: <%= err.message %></p>
+    <main>
+      <header>Error</header>
+      <p><%= err.statusCode %>: <%= err.message %></p>
+    </main>
   </body>
 </html>

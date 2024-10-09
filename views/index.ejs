@@ -7,23 +7,25 @@
   </head>
   <body>
     <%- include("partials/navbar", { links }) %>
-    <header>Home</header>
-    <p>
-      Welcome to Game Vault, your go-to hub for discovering and tracking video games! Our site offers a streamlined inventory filled with essential information about your favorite titles. Each entry includes the game title, price, a brief overview, release date, developer, genres, and platforms.
-      <br>
-      Whether you're hunting for the latest blockbuster or a hidden gem, Game Vault makes it easy to find what you need at a glance. Explore our collection to stay informed and make the best gaming choices! Join us as we celebrate the diverse world of video games, one title at a time. Happy gaming!
-    </p>
-    <ul>
-      <h1>New additions</h1>
-      <% games.forEach((game) => { %>
-        <li>
-          <p><%= game.game %></p>
-          <p><%= game.price %>€</p>
-          <p><%= game.developersString %></p>
-          <p><%= game.genresString %></p>
-          <p><%= game.platformsString %></p>
-        </li>
-      <% }) %>
-    </ul>
+    <main>
+      <header>Home</header>
+      <p>
+        Welcome to Game Vault, your go-to hub for discovering and tracking video games! Our site offers a streamlined inventory filled with essential information about your favorite titles. Each entry includes the game title, price, a brief overview, release date, developer, genres, and platforms.
+        <br>
+        Whether you're hunting for the latest blockbuster or a hidden gem, Game Vault makes it easy to find what you need at a glance. Explore our collection to stay informed and make the best gaming choices! Join us as we celebrate the diverse world of video games, one title at a time. Happy gaming!
+      </p>
+      <ul>
+        <h1>New additions</h1>
+        <% games.forEach((game) => { %>
+          <li>
+            <p><%= game.game %></p>
+            <p><%= game.price %>€</p>
+            <p><%= game.developersString %></p>
+            <p><%= game.genresString %></p>
+            <p><%= game.platformsString %></p>
+          </li>
+        <% }) %>
+      </ul>
+    </main>
   </body>
 </html>
