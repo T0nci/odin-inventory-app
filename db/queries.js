@@ -1,9 +1,27 @@
 const db = require("./pool");
 const CustomError = require("../utils/CustomError");
 
+const getNewAdditions = async () => {
+  const { rows } = await db.query(
+    "SELECT id, game, price FROM games ORDER BY id DESC LIMIT 4",
+  );
+
+  const games = [];
+  for (const row of rows) {
+    const gameInfo = await db.query(
+      "SELECT category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE game_id = $1",
+      [row.id],
+    );
+
+    games.append({ ...row, details: gameInfo });
+  }
+
+  return games;
+};
+
 const getAllCategories = async () => {
   const { rows } = await db.query(
-    "SELECT id, category, type FROM categories JOIN types ON categories.type_id = types.id",
+    "SELECT categories.id, category, type FROM categories JOIN types ON categories.type_id = types.id",
   );
   return rows;
 };
@@ -51,6 +69,7 @@ const getGamesByCategoryId = async (categoryId) => {
 };
 
 module.exports = {
+  getNewAdditions,
   getAllCategories,
   getAllGames,
   getGamesByCategoryId,
