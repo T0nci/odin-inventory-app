@@ -12,6 +12,15 @@ const formatRelations = (relationRows) => {
   return arrays;
 };
 
+const limitStringLength = (string) => {
+  if (string.length > 30) {
+    return string.slice(0, 27) + "...";
+  }
+
+  return string;
+};
+
 module.exports = {
   formatRelations,
+  limitStringLength,
 };

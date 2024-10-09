@@ -1,6 +1,6 @@
 const db = require("./pool");
 const CustomError = require("../utils/CustomError");
-const { formatRelations } = require("../utils/helpers");
+const { formatRelations, limitStringLength } = require("../utils/helpers");
 
 const getNewAdditions = async () => {
   const { rows } = await db.query(
@@ -14,7 +14,18 @@ const getNewAdditions = async () => {
       [row.id],
     );
 
-    games.push({ ...row, ...formatRelations(gameInfo.rows) });
+    const newRow = { ...row, ...formatRelations(gameInfo.rows) };
+
+    games.push({
+      ...newRow,
+      genresString: limitStringLength(
+        newRow.genres
+          .map((item) => item[0].toUpperCase() + item.slice(1))
+          .join(", "),
+      ),
+      developersString: limitStringLength(newRow.developers.join(", ")),
+      platformsString: limitStringLength(newRow.platforms.join(", ")),
+    });
   }
 
   return games;
