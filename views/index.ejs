@@ -18,11 +18,13 @@
         <h1>New additions</h1>
         <% games.forEach((game) => { %>
           <li>
-            <p><%= game.game %></p>
-            <p><%= game.price %>€</p>
-            <p><%= game.developersString %></p>
-            <p><%= game.genresString %></p>
-            <p><%= game.platformsString %></p>
+            <button onclick="location.href = '/games/<%= game.id %>'">
+              <p><%= game.game %></p>
+              <p><%= game.price %>€</p>
+              <p><%= game.developersString %></p>
+              <p><%= game.genresString %></p>
+              <p><%= game.platformsString %></p>
+            </button>
           </li>
         <% }) %>
       </ul>

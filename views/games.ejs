@@ -12,13 +12,15 @@
       <ul>
         <% games.forEach((game) => { %>
           <li>
-            <p><%= game.game %></p>
-            <p><%= game.price %>€</p>
-            <ul>
-              <% game.genres.forEach((genre) => { %>
-                <li><%= genre %></li>
-              <% }) %>
-            </ul>
+            <button onclick="location.href = '/games/<%= game.id %>'">
+              <p><%= game.game %></p>
+              <p><%= game.price %>€</p>
+              <ul>
+                <% game.genres.forEach((genre) => { %>
+                  <li><%= genre %></li>
+                <% }) %>
+              </ul>
+            </button>
           </li>
         <% }) %>
       </ul>

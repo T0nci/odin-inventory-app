@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= game.game %> - Inventory App</title>
+  </head>
+  <body>
+    <%- include("partials/navbar", { links }) %>
+    <main>
+      <p><%= game.game %></p>
+      <p><%= game.price %>€</p>
+      <p><%= game.about %></p>
+      <p><%= game.release_date.toDateString().slice(4) %></p>
+      <ul>
+        <p>Genres:</p>
+        <% game.genres.forEach((genre) => { %>
+          <li><%= genre %></li>
+        <% }) %>
+      </ul>
+      <ul>
+        <p>Developers:</p>
+        <% game.developers.forEach((developer) => { %>
+          <li><%= developer %></li>
+        <% }) %>
+      </ul>
+      <ul>
+        <p>Platforms:</p>
+        <% game.platforms.forEach((platform) => { %>
+          <li><%= platform %></li>
+        <% }) %>
+      </ul>
+    </main>
+  </body>
+</html>

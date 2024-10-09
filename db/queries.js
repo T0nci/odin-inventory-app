@@ -48,7 +48,7 @@ const getAllGames = async () => {
       [row.id],
     );
 
-    games.push({ ...row, genres: gameInfo.map((row) => row.category) });
+    games.push({ ...row, genres: gameInfo.rows.map((row) => row.category) });
   }
 
   return games;
@@ -74,10 +74,24 @@ const getGamesByCategoryId = async (categoryId) => {
       [row.id],
     );
 
-    games.push({ ...row, genres: gameInfo.map((row) => row.category) });
+    games.push({ ...row, genres: gameInfo.rows.map((row) => row.category) });
   }
 
   return games;
+};
+
+const getGameById = async (id) => {
+  const game = (await db.query("SELECT * FROM games WHERE id = $1", [id]))
+    .rows[0];
+
+  if (!game) throw new CustomError("Game Not Found.", 404);
+
+  const gameInfo = await db.query(
+    "SELECT category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE game_id = $1",
+    [game.id],
+  );
+
+  return { ...game, ...formatRelations(gameInfo.rows) };
 };
 
 module.exports = {
@@ -85,4 +99,5 @@ module.exports = {
   getAllCategories,
   getAllGames,
   getGamesByCategoryId,
+  getGameById,
 };
