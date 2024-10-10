@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("node:path");
 const indexRouter = require("./routes/indexRouter");
+const categoryRouter = require("./routes/categoryRouter");
 const gameRouter = require("./routes/gameRouter");
 const links = require("./utils/links");
 const CustomError = require("./utils/CustomError");
@@ -14,6 +15,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
+app.use("/categories", categoryRouter);
 app.use("/games", gameRouter);
 
 // Custom error handler for every error
