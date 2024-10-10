@@ -34,6 +34,14 @@ const getAllCategories = async () => {
   return rows;
 };
 
+const getCategoryById = async (id) => {
+  const { rows } = await db.query(
+    "SELECT category, type FROM categories JOIN types ON categories.type_id = types.id WHERE categories.id = $1",
+    [id],
+  );
+  return rows[0];
+};
+
 const getAllGames = async () => {
   const { rows } = await db.query("SELECT id, game, price FROM games");
 
@@ -51,7 +59,7 @@ const getAllGames = async () => {
 };
 
 const getGamesByCategoryId = async (categoryId) => {
-  const categories = await db.query("SELECT id FROM categories");
+  const categories = (await db.query("SELECT id FROM categories")).rows;
 
   if (!categories.find((row) => row.id === categoryId))
     throw new CustomError("Category Not Found", 404);
@@ -93,6 +101,7 @@ const getGameById = async (id) => {
 module.exports = {
   getNewAdditions,
   getAllCategories,
+  getCategoryById,
   getAllGames,
   getGamesByCategoryId,
   getGameById,

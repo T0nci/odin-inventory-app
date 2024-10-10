@@ -8,7 +8,12 @@ const getCategories = asyncHandler(async (req, res) => {
 });
 
 const getGamesByCategory = asyncHandler(async (req, res) => {
-  res.send("It twerks!");
+  const games = await db.getGamesByCategoryId(Number(req.params.categoryId));
+
+  // No need for checking if the id is good since the query above checks it
+  const category = await db.getCategoryById(Number(req.params.categoryId));
+
+  res.render("games", { links, games, filter: category });
 });
 
 module.exports = {
