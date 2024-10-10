@@ -12,20 +12,29 @@
       <div>
         <ul>
           <h1>Genres</h1>
-          <% categories.genres.forEach((genre) => { %>
-            <li><a href="/categories/<%= genre %>"><%= genre %></a></li>
+          <% categories
+            .filter(row => row.type === "genre").forEach((row) => { %>
+            <li>
+              <a href="/categories/<%= row.id %>"><%= row.category %></a>
+            </li>
           <% }) %>
         </ul>
         <ul>
           <h1>Platforms</h1>
-          <% categories.platforms.forEach((platform) => { %>
-            <li><a href="/categories/<%= platform %>"><%= platform %></a></li>
+          <% categories
+            .filter(row => row.type === "platform").forEach((row) => { %>
+            <li>
+              <a href="/categories/<%= row.id %>"><%= row.category %></a>
+            </li>
           <% }) %>
         </ul>
         <ul>
           <h1>Developers</h1>
-          <% categories.developers.forEach((developer) => { %>
-            <li><a href="/categories/<%= developer %>"><%= developer %></a></li>
+          <% categories
+            .filter(row => row.type === "developer").forEach((row) => { %>
+            <li>
+              <a href="/categories/<%= row.id %>"><%= row.category %></a>
+            </li>
           <% }) %>
         </ul>
       </div>

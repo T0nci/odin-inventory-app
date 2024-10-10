@@ -31,7 +31,7 @@ const getAllCategories = async () => {
   const { rows } = await db.query(
     "SELECT categories.id, category, type FROM categories JOIN types ON categories.type_id = types.id",
   );
-  return formatRelations(rows);
+  return rows;
 };
 
 const getAllGames = async () => {

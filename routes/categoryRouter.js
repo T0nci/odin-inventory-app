@@ -4,6 +4,6 @@ const categoryController = require("../controllers/categoryController");
 const categoryRouter = Router();
 
 categoryRouter.get("/", categoryController.getCategories);
-categoryRouter.get("/:category", categoryController.getGamesByCategory);
+categoryRouter.get("/:categoryId", categoryController.getGamesByCategory);
 
 module.exports = categoryRouter;
