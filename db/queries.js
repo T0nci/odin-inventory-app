@@ -18,11 +18,7 @@ const getNewAdditions = async () => {
 
     games.push({
       ...row,
-      genresString: limitStringLength(
-        relations.genres
-          .map((item) => item[0].toUpperCase() + item.slice(1))
-          .join(", "),
-      ),
+      genresString: limitStringLength(relations.genres.join(", ")),
       developersString: limitStringLength(relations.developers.join(", ")),
       platformsString: limitStringLength(relations.platforms.join(", ")),
     });
@@ -35,7 +31,7 @@ const getAllCategories = async () => {
   const { rows } = await db.query(
     "SELECT categories.id, category, type FROM categories JOIN types ON categories.type_id = types.id",
   );
-  return rows;
+  return formatRelations(rows);
 };
 
 const getAllGames = async () => {
