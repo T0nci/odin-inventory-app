@@ -12,7 +12,7 @@
       <ul>
         <% games.forEach((game) => { %>
           <li>
-            <button onclick="location.href = '/games/<%= game.id %>'">
+            <button onclick="location.href = '/games/game/<%= game.id %>'">
               <p><%= game.game %></p>
               <p><%= game.price %>€</p>
               <ul>
