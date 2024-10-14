@@ -9,13 +9,14 @@
     <%- include("partials/navbar", { links }) %>
     <main>
       <header>Categories</header>
+      <a href="/categories/create">Create New Category</a>
       <div>
         <ul>
           <h1>Genres</h1>
           <% categories
             .filter(row => row.type === "genre").forEach((row) => { %>
             <li>
-              <a href="/categories/<%= row.id %>"><%= row.category %></a>
+              <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
             </li>
           <% }) %>
         </ul>
@@ -24,7 +25,7 @@
           <% categories
             .filter(row => row.type === "platform").forEach((row) => { %>
             <li>
-              <a href="/categories/<%= row.id %>"><%= row.category %></a>
+              <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
             </li>
           <% }) %>
         </ul>
@@ -33,7 +34,7 @@
           <% categories
             .filter(row => row.type === "developer").forEach((row) => { %>
             <li>
-              <a href="/categories/<%= row.id %>"><%= row.category %></a>
+              <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
             </li>
           <% }) %>
         </ul>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= action %> Category - Inventory App</title>
+  </head>
+  <body>
+    <%- include("partials/navbar", { links }) %>
+    <main>
+      <header><%= action %> Category</header>
+      <form action="/categories/<%= href %>" method="POST">
+        <%- include("partials/errors", { errors: locals.errors }) %>
+        <div>
+          <label for="categoryName">Category name:</label>
+          <input type="text" name="categoryName" id="categoryName" autocomplete="off" autofocus required>
+        </div>
+        <fieldset>
+          <legend>Type of category:</legend>
+          <% types.forEach((type) => { %>
+            <% if (type.checked) { %>
+              <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required checked>
+              <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
+            <% } else { %>
+              <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required>
+              <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
+            <% } %>
+          <% }) %>
+        </fieldset>
+        <div>
+          <label for="password">Admin password:</label>
+          <input type="password" name="password" id="password" required>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

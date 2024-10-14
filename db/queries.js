@@ -98,6 +98,18 @@ const getGameById = async (id) => {
   return { ...game, ...formatRelations(gameInfo.rows) };
 };
 
+const getAllTypesOfCategories = async () => {
+  const { rows } = await db.query("SELECT * FROM types");
+  return rows;
+};
+
+const createCategory = async (category, typeId) => {
+  await db.query("INSERT INTO categories(category, type_id) VALUES ($1, $2)", [
+    category,
+    typeId,
+  ]);
+};
+
 module.exports = {
   getNewAdditions,
   getAllCategories,
@@ -105,4 +117,6 @@ module.exports = {
   getAllGames,
   getGamesByCategoryId,
   getGameById,
+  getAllTypesOfCategories,
+  createCategory,
 };
