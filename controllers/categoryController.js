@@ -15,7 +15,7 @@ const validateCreateCategory = () => [
     .custom(async (id) => {
       const ids = await db.getAllTypesOfCategories();
 
-      return ids.find((row) => row.id === Number(id));
+      if (ids.find((row) => row.id === Number(id)) === undefined) throw false;
     })
     .withMessage("Invalid type."),
   body("password")
