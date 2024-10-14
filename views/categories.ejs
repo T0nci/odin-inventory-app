@@ -17,6 +17,7 @@
             .filter(row => row.type === "genre").forEach((row) => { %>
             <li>
               <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
+              <a href="/categories/update/<%= row.id %>">Update</a>
             </li>
           <% }) %>
         </ul>
@@ -26,6 +27,7 @@
             .filter(row => row.type === "platform").forEach((row) => { %>
             <li>
               <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
+              <a href="/categories/update/<%= row.id %>">Update</a>
             </li>
           <% }) %>
         </ul>
@@ -35,6 +37,7 @@
             .filter(row => row.type === "developer").forEach((row) => { %>
             <li>
               <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
+              <a href="/categories/update/<%= row.id %>">Update</a>
             </li>
           <% }) %>
         </ul>

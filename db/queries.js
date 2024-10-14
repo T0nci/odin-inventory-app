@@ -110,6 +110,13 @@ const createCategory = async (category, typeId) => {
   ]);
 };
 
+const updateCategory = async (category, typeId, id) => {
+  await db.query(
+    "UPDATE categories SET category = $1, type_id = $2 WHERE id = $3",
+    [category, typeId, id],
+  );
+};
+
 module.exports = {
   getNewAdditions,
   getAllCategories,
@@ -119,4 +126,5 @@ module.exports = {
   getGameById,
   getAllTypesOfCategories,
   createCategory,
+  updateCategory,
 };

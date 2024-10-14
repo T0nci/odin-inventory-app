@@ -10,5 +10,7 @@ categoryRouter.get(
 );
 categoryRouter.get("/create", categoryController.getCreateCategory);
 categoryRouter.post("/create", categoryController.postCreateCategory);
+categoryRouter.get("/update/:id", categoryController.getUpdateCategory);
+categoryRouter.post("/update/:id", categoryController.postUpdateCategory);
 
 module.exports = categoryRouter;
