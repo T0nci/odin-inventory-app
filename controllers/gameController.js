@@ -92,6 +92,7 @@ const getCreateGame = asyncHandler(async (req, res) => {
     action: "Create",
     href: "create",
     links,
+    game: {},
     types,
   });
 });
@@ -103,10 +104,11 @@ const postCreateGame = [
     if (!errors.isEmpty()) {
       const types = formatRelations(await db.getAllCategories());
 
-      return res.render("gameForm", {
+      return res.status(400).render("gameForm", {
         action: "Create",
         href: "create",
         links,
+        game: {},
         types,
         errors: errors.array(),
       });
