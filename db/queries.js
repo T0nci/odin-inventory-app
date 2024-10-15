@@ -154,6 +154,36 @@ const createGame = async (game) => {
   }
 };
 
+const updateGame = async (game) => {
+  const client = await db.getClient();
+
+  try {
+    await client.query("BEGIN");
+
+    await client.query(
+      "UPDATE games SET game = $1, price = $2, release_date = $3, about = $4 WHERE id = $5",
+      [game.game, game.price, game.release_date, game.about, game.id],
+    );
+
+    await client.query("DELETE FROM game_relations WHERE game_id = $1", [
+      game.id,
+    ]);
+    for (const rel of game.relations) {
+      await client.query(
+        "INSERT INTO game_relations(game_id, category_id) VALUES ($1, $2)",
+        [game.id, rel],
+      );
+    }
+
+    await client.query("COMMIT");
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw err;
+  } finally {
+    client.release();
+  }
+};
+
 module.exports = {
   getNewAdditions,
   getAllCategories,
@@ -165,4 +195,5 @@ module.exports = {
   createCategory,
   updateCategory,
   createGame,
+  updateGame,
 };

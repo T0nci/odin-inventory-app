@@ -3,7 +3,7 @@ const CustomError = require("../utils/CustomError");
 const { formatRelations } = require("../utils/helpers");
 const links = require("../utils/links");
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
+const { body, validationResult, param } = require("express-validator");
 
 const validateGameBody = () => [
   body("game")
@@ -67,6 +67,14 @@ const validateGameBody = () => [
     .withMessage("Incorrect password."),
 ];
 
+const validateGameId = () =>
+  param("id")
+    .custom(async (id) => {
+      const game = await db.getGameById(id);
+      if (!game) throw false;
+    })
+    .withMessage("Game not found.");
+
 const getGames = asyncHandler(async (req, res) => {
   const games = await db.getAllGames();
   res.render("games", { links, games });
@@ -127,9 +135,85 @@ const postCreateGame = [
   }),
 ];
 
+const getUpdateGame = [
+  validateGameId(),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) throw new CustomError(errors.array[0].msg, 404);
+
+    const game = await db.getGameById(req.params.id);
+    game.release_date = `${game.release_date.getFullYear()}-${game.release_date.getMonth() + 1}-${game.release_date.getDate()}`;
+
+    // Get types and set checked to true where we need to so we can show them in form
+    const types = formatRelations(await db.getAllCategories());
+    for (const type of Object.keys(types)) {
+      types[type].forEach((cat) => {
+        if (game[type].find((cat1) => cat.id === cat1.id)) cat.checked = true;
+      });
+    }
+
+    res.render("gameForm", {
+      action: "Update",
+      href: "update/" + game.id,
+      links,
+      types,
+      game,
+    });
+  }),
+];
+
+const postUpdateGame = [
+  validateGameId(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) throw new CustomError(errors.array()[0].msg, 404);
+
+    next();
+  }),
+  validateGameBody(),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const game = await db.getGameById(req.params.id);
+      game.release_date = `${game.release_date.getFullYear()}-${game.release_date.getMonth() + 1}-${game.release_date.getDate()}`;
+
+      // Get types and set checked to true where we need to so we can show them in form
+      const types = formatRelations(await db.getAllCategories());
+      for (const type of Object.keys(types)) {
+        types[type].forEach((cat) => {
+          if (game[type].find((cat1) => cat.id === cat1.id)) cat.checked = true;
+        });
+      }
+
+      return res.status(400).render("gameForm", {
+        action: "Update",
+        href: "update/" + game.id,
+        links,
+        types,
+        game,
+        errors: errors.array(),
+      });
+    }
+
+    await db.updateGame({
+      id: Number(req.params.id),
+      game: req.body.game,
+      price: Number(req.body.price),
+      release_date: req.body.releaseDate,
+      about: req.body.about,
+      relations: []
+        .concat(req.body.genres, req.body.developers, req.body.platforms)
+        .map((item) => Number(item)),
+    });
+    res.redirect("/games");
+  }),
+];
+
 module.exports = {
   getGames,
   getGameById,
   getCreateGame,
   postCreateGame,
+  getUpdateGame,
+  postUpdateGame,
 };
