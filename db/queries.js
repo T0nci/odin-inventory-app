@@ -123,6 +123,39 @@ const updateCategory = async (category, typeId, id) => {
   );
 };
 
+const createGame = async (game) => {
+  const client = await db.getClient();
+
+  try {
+    await client.query("BEGIN");
+
+    await client.query(
+      "INSERT INTO games(game, price, release_date, about) VALUES ($1, $2, TO_DATE($3, 'YYYY-MM-DD'), $4)",
+      [game.game, game.price, game.release_date, game.about],
+    );
+    const gameId = (
+      await client.query(
+        "SELECT id FROM games WHERE game = $1 AND price = $2 AND release_date = $3 AND about = $4",
+        [game.game, game.price, game.release_date, game.about],
+      )
+    ).rows[0].id;
+
+    for (const rel of game.relations) {
+      await client.query(
+        "INSERT INTO game_relations(game_id, category_id) VALUES ($1, $2)",
+        [gameId, rel],
+      );
+    }
+
+    await client.query("COMMIT");
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw err;
+  } finally {
+    client.release();
+  }
+};
+
 module.exports = {
   getNewAdditions,
   getAllCategories,
@@ -133,4 +166,5 @@ module.exports = {
   getAllTypesOfCategories,
   createCategory,
   updateCategory,
+  createGame,
 };

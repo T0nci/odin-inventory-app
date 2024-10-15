@@ -9,7 +9,7 @@
     <%- include("partials/navbar", { links }) %>
     <main>
       <header><%= action %> Game</header>
-      <form action="/categories/<%= href %>" method="POST">
+      <form action="/games/<%= href %>" method="POST">
         <%- include("partials/errors", { errors: locals.errors }) %>
         <div>
           <label for="game">Game:</label>
@@ -32,7 +32,7 @@
             <legend><%= type[0].toUpperCase() + type.slice(1) %></legend>
             <% types[type].forEach((row) => { %>
               <div>
-                <input type="checkbox" name="<%= type %>" id="<%= row.category %>" value="<%= row.id %>" required>
+                <input type="checkbox" name="<%= type %>" id="<%= row.category %>" value="<%= row.id %>">
                 <label for="<%= row.category %>"><%= row.category[0].toUpperCase() + row.category.slice(1) %></label>
               </div>
             <% }) %>
