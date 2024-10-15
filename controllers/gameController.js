@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const CustomError = require("../utils/CustomError");
+const { formatRelations } = require("../utils/helpers");
 const links = require("../utils/links");
 const asyncHandler = require("express-async-handler");
 
@@ -21,7 +22,19 @@ const getGameById = asyncHandler(async (req, res) => {
   res.render("game", { links, game });
 });
 
+const getCreateGame = asyncHandler(async (req, res) => {
+  const types = formatRelations(await db.getAllCategories());
+
+  res.render("gameForm", {
+    action: "Create",
+    href: "/games/create",
+    links,
+    types,
+  });
+});
+
 module.exports = {
   getGames,
   getGameById,
+  getCreateGame,
 };

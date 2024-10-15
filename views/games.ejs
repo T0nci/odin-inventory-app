@@ -9,6 +9,7 @@
     <%- include("partials/navbar", { links }) %>
     <main>
       <header>Games<%= locals.filter && `, ${filter.type}: ${filter.category}` %></header>
+      <a href="/games/create">Create new game</a>
       <ul>
         <% games.forEach((game) => { %>
           <li>
