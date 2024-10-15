@@ -10,7 +10,7 @@ const getNewAdditions = async () => {
   const games = [];
   for (const row of rows) {
     const gameInfo = await db.query(
-      "SELECT category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE game_id = $1",
+      "SELECT categories.id, category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE game_id = $1",
       [row.id],
     );
 
@@ -18,9 +18,15 @@ const getNewAdditions = async () => {
 
     games.push({
       ...row,
-      genresString: limitStringLength(relations.genres.join(", ")),
-      developersString: limitStringLength(relations.developers.join(", ")),
-      platformsString: limitStringLength(relations.platforms.join(", ")),
+      genresString: limitStringLength(
+        relations.genres.map((row) => row.category).join(", "),
+      ),
+      developersString: limitStringLength(
+        relations.developers.map((row) => row.category).join(", "),
+      ),
+      platformsString: limitStringLength(
+        relations.platforms.map((row) => row.category).join(", "),
+      ),
     });
   }
 
@@ -91,7 +97,7 @@ const getGameById = async (id) => {
   if (!game) throw new CustomError("Game Not Found.", 404);
 
   const gameInfo = await db.query(
-    "SELECT category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE game_id = $1",
+    "SELECT categories.id, category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE game_id = $1",
     [game.id],
   );
 

@@ -14,20 +14,20 @@
       <p><%= game.release_date.toDateString().slice(4) %></p>
       <ul>
         <p>Genres:</p>
-        <% game.genres.forEach((genre) => { %>
-          <li><%= genre %></li>
+        <% game.genres.forEach((row) => { %>
+          <li><%= row.category %></li>
         <% }) %>
       </ul>
       <ul>
         <p>Developers:</p>
-        <% game.developers.forEach((developer) => { %>
-          <li><%= developer %></li>
+        <% game.developers.forEach((row) => { %>
+          <li><%= row.category %></li>
         <% }) %>
       </ul>
       <ul>
         <p>Platforms:</p>
-        <% game.platforms.forEach((platform) => { %>
-          <li><%= platform %></li>
+        <% game.platforms.forEach((row) => { %>
+          <li><%= row.category %></li>
         <% }) %>
       </ul>
     </main>

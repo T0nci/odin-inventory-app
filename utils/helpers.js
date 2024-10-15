@@ -6,7 +6,10 @@ const formatRelations = (relationRows) => {
   };
 
   for (const relation of relationRows) {
-    arrays[relation.type + "s"].push(relation.category);
+    arrays[relation.type + "s"].push({
+      category: relation.category,
+      id: relation.id,
+    });
   }
 
   return arrays;
