@@ -94,8 +94,6 @@ const getGameById = async (id) => {
   const game = (await db.query("SELECT * FROM games WHERE id = $1", [id]))
     .rows[0];
 
-  if (!game) throw new CustomError("Game Not Found.", 404);
-
   const gameInfo = await db.query(
     "SELECT categories.id, category, type FROM categories JOIN types ON categories.type_id = types.id JOIN game_relations ON categories.id = game_relations.category_id WHERE game_id = $1",
     [game.id],
