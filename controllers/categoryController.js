@@ -24,6 +24,11 @@ const validateCreateCategory = () => [
     .withMessage("Incorrect password."),
 ];
 
+const validateBodyPassword = () =>
+  body("password")
+    .custom((password) => password === process.env.ADMIN_PASSWORD)
+    .withMessage("Incorrect password.");
+
 const validateParams = () =>
   param("id")
     .isInt()
@@ -137,6 +142,24 @@ const postUpdateCategory = [
   }),
 ];
 
+const postDeleteCategory = [
+  validateParams(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) throw new CustomError(errors.array()[0].msg, 400);
+
+    next();
+  }),
+  validateBodyPassword(),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.redirect("/categories");
+
+    await db.deleteCategory(Number(req.params.id));
+    res.redirect("/categories");
+  }),
+];
+
 module.exports = {
   getCategories,
   getGamesByCategory,
@@ -144,4 +167,5 @@ module.exports = {
   postCreateCategory,
   getUpdateCategory,
   postUpdateCategory,
+  postDeleteCategory,
 };

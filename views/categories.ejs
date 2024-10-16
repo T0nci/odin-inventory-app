@@ -18,6 +18,15 @@
             <li>
               <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
               <a href="/categories/update/<%= row.id %>">Update</a>
+              <form action="/categories/delete/<%= row.id %>" method="POST">
+                <div>
+                  <label for="password">Admin password:</label>
+                  <input type="password" name="password" id="password" required>
+                </div>
+                <div>
+                  <button type="submit">Delete category</button>
+                </div>
+              </form>
             </li>
           <% }) %>
         </ul>
@@ -28,6 +37,15 @@
             <li>
               <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
               <a href="/categories/update/<%= row.id %>">Update</a>
+              <form action="/categories/delete/<%= row.id %>" method="POST">
+                <div>
+                  <label for="password">Admin password:</label>
+                  <input type="password" name="password" id="password" required>
+                </div>
+                <div>
+                  <button type="submit">Delete category</button>
+                </div>
+              </form>
             </li>
           <% }) %>
         </ul>
@@ -38,6 +56,15 @@
             <li>
               <a href="/categories/category/<%= row.id %>"><%= row.category %></a>
               <a href="/categories/update/<%= row.id %>">Update</a>
+              <form action="/categories/delete/<%= row.id %>" method="POST">
+                <div>
+                  <label for="password">Admin password:</label>
+                  <input type="password" name="password" id="password" required>
+                </div>
+                <div>
+                  <button type="submit">Delete category</button>
+                </div>
+              </form>
             </li>
           <% }) %>
         </ul>

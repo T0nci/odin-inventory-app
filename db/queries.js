@@ -121,6 +121,59 @@ const updateCategory = async (category, typeId, id) => {
   );
 };
 
+const deleteCategory = async (categoryId) => {
+  const categoryIds = (
+    await db.query(
+      "SELECT id FROM categories WHERE type_id = (SELECT type_id FROM categories WHERE id = $1) AND id != $2",
+      [categoryId, categoryId],
+    )
+  ).rows;
+  let relationsQuery =
+    "SELECT * FROM game_relations WHERE game_id = $1 AND category_id IN (";
+  for (let i = 0; i < categoryIds.length; i++) relationsQuery += `$${i + 2}, `;
+  relationsQuery = relationsQuery.slice(0, -2) + ")";
+
+  const games = (
+    await db.query(
+      "SELECT game_id FROM game_relations WHERE category_id = $1",
+      [categoryId],
+    )
+  ).rows;
+  for (const game of games) {
+    const results = (
+      await db.query(relationsQuery, [
+        game.game_id,
+        ...categoryIds.map((row) => Number(row.id)),
+      ])
+    ).rows;
+    if (results.length === 0) game.delete = true;
+  }
+
+  const gamesToDelete = games.filter((game) => game.delete);
+  const client = await db.getClient();
+  try {
+    await db.query("BEGIN");
+
+    for (const game of gamesToDelete) {
+      await db.query("DELETE FROM game_relations WHERE game_id = $1", [
+        game.game_id,
+      ]);
+      await db.query("DELETE FROM games WHERE id = $1", [game.game_id]);
+    }
+    await db.query("DELETE FROM game_relations WHERE category_id = $1", [
+      categoryId,
+    ]);
+    await db.query("DELETE FROM categories WHERE id = $1", [categoryId]);
+
+    await db.query("COMMIT");
+  } catch (err) {
+    await db.query("ROLLBACK");
+    throw err;
+  } finally {
+    await client.release();
+  }
+};
+
 const createGame = async (game) => {
   const client = await db.getClient();
 
@@ -212,6 +265,7 @@ module.exports = {
   getAllTypesOfCategories,
   createCategory,
   updateCategory,
+  deleteCategory,
   createGame,
   updateGame,
   deleteGame,
