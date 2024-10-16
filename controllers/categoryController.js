@@ -6,9 +6,9 @@ const { body, validationResult, param } = require("express-validator");
 
 const validateCreateCategory = () => [
   body("categoryName")
-    .custom((str) => /^[a-zA-Z0-9.-]+$/.test(str))
+    .custom((str) => /^[a-zA-Z0-9. -]+$/.test(str))
     .withMessage(
-      "Category name must contain only alphanumerical characters, '.' and '-'.",
+      "Category name must contain only alphanumerical characters, '.', '-' and spaces.",
     )
     .isLength({ min: 1, max: 30 })
     .withMessage("Category name must contain between 1 and 30 characters"),
