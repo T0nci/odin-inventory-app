@@ -8,7 +8,7 @@ const { body, validationResult, param } = require("express-validator");
 const validateGameBody = () => [
   body("game")
     .trim()
-    .custom((str) => /^[a-zA-Z0-9-.]+$/.test(str))
+    .custom((str) => /^[a-zA-Z0-9- .]+$/.test(str))
     .withMessage(
       "Game name must contain only alphanumerical characters, '.' and '-'.",
     )
