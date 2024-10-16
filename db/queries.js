@@ -184,6 +184,24 @@ const updateGame = async (game) => {
   }
 };
 
+const deleteGame = async (id) => {
+  const client = await db.getClient();
+
+  try {
+    await client.query("BEGIN");
+
+    await client.query("DELETE FROM game_relations WHERE game_id = $1", [id]);
+    await client.query("DELETE FROM games WHERE id = $1", [id]);
+
+    await client.query("COMMIT");
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw err;
+  } finally {
+    client.release();
+  }
+};
+
 module.exports = {
   getNewAdditions,
   getAllCategories,
@@ -196,4 +214,5 @@ module.exports = {
   updateCategory,
   createGame,
   updateGame,
+  deleteGame,
 };

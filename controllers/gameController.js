@@ -67,6 +67,11 @@ const validateGameBody = () => [
     .withMessage("Incorrect password."),
 ];
 
+const validateBodyPassword = () =>
+  body("password")
+    .custom((password) => password === process.env.ADMIN_PASSWORD)
+    .withMessage("Incorrect password.");
+
 const validateGameId = () =>
   param("id")
     .custom(async (id) => {
@@ -209,6 +214,24 @@ const postUpdateGame = [
   }),
 ];
 
+const postDeleteGame = [
+  validateGameId(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) throw new CustomError(errors.array()[0].msg, 404);
+
+    next();
+  }),
+  validateBodyPassword(),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.redirect("/games/game/" + req.params.id);
+
+    await db.deleteGame(Number(req.params.id));
+    res.redirect("/games");
+  }),
+];
+
 module.exports = {
   getGames,
   getGameById,
@@ -216,4 +239,5 @@ module.exports = {
   postCreateGame,
   getUpdateGame,
   postUpdateGame,
+  postDeleteGame,
 };

@@ -30,7 +30,16 @@
           <li><%= row.category %></li>
         <% }) %>
       </ul>
-      <a href="/games/update/<%= game.id %>">Update</a>
+      <a href="/games/update/<%= game.id %>">Update game</a>
+      <form action="/games/delete/<%= game.id %>" method="POST">
+        <div>
+          <label for="password">Admin password:</label>
+          <input type="password" name="password" id="password" required>
+        </div>
+        <div>
+          <button type="submit">Delete game</button>
+        </div>
+      </form>
     </main>
   </body>
 </html>
