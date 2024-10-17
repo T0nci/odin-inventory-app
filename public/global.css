@@ -20,19 +20,14 @@ nav {
 
   display: flex;
   justify-content: center;
+  align-content: center;
   gap: 1rem;
 }
 
 .nav-link {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
-  /* padding: 0.2rem; for desktop query */
 }
-
-/* .nav-link:hover { for desktop query
-  padding-bottom: 0;
-  border-bottom: 0.2rem solid lightgray;
-} */
 
 .no-text-decor {
   text-decoration: none;
@@ -48,4 +43,19 @@ header {
   font-weight: bold;
   text-align: center;
   margin-bottom: 1rem;
+}
+
+@media (min-width: 400px) {
+  .nav-link {
+    padding: 0.2rem;
+  }
+
+  .nav-link:hover {
+    padding-bottom: 0;
+    border-bottom: 0.2rem solid lightgray;
+  }
+
+  main {
+    padding: 1rem 2rem;
+  }
 }
