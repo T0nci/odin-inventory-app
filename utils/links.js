@@ -1,7 +1,7 @@
 module.exports = [
   {
     href: "/",
-    text: "Home",
+    text: "GameVault",
   },
   {
     href: "/categories",
