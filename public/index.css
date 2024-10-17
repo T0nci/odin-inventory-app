@@ -1,0 +1,39 @@
+.intro {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.heading {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.new-additions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.new-additions > li {
+  width: 100%;
+}
+
+.game {
+  display: block;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  background-color: lightgray;
+  padding: 1rem;
+  font-size: 1.25rem;
+  text-align: left;
+}
+
+.game-name {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
