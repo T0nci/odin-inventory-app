@@ -1,9 +1,16 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+
+  position: relative;
 }
 
 nav {
   border-bottom: 1px solid lightgray;
+  background-color: white;
+
+  position: sticky;
+  top: 0;
+  left: 0;
 }
 
 .nav {
@@ -17,11 +24,28 @@ nav {
 }
 
 .nav-link {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  /* padding: 0.2rem; for desktop query */
 }
+
+/* .nav-link:hover { for desktop query
+  padding-bottom: 0;
+  border-bottom: 0.2rem solid lightgray;
+} */
 
 .no-text-decor {
   text-decoration: none;
   color: black;
+}
+
+main {
+  padding: 1rem 0.5rem;
+}
+
+header {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
 }
