@@ -16,33 +16,33 @@
         <form action="/games/<%= href %>" method="POST" class="form">
           <%- include("partials/errors", { errors: locals.errors }) %>
           <div class="form-part">
-            <label for="game">Game:</label>
+            <label for="game" class="bold">Game:</label>
             <input type="text" name="game" id="game" autocomplete="off" value="<%= game.game || '' %>" autofocus required class="text-input">
           </div>
           <div class="form-part">
-            <label for="price">Price(in euros - €):</label>
+            <label for="price" class="bold">Price(in euros - €):</label>
             <input type="tel" name="price" id="price" autocomplete="off" value="<%= game.price || '' %>" required class="text-input">
           </div>
           <div class="form-part">
-            <label for="releaseDate">Release Date:</label>
+            <label for="releaseDate" class="bold">Release Date:</label>
             <input type="date" name="releaseDate" id="releaseDate" value="<%= game.release_date || '' %>" required class="text-input">
           </div>
           <div class="form-part">
-            <label for="about">About:</label>
-            <textarea name="about" id="about" required><%= game.about || '' %></textarea>
+            <label for="about" class="bold">About:</label>
+            <textarea name="about" id="about" required class="text-area"><%= game.about || '' %></textarea>
           </div>
           <% Object.keys(types).forEach((type) => { %>
-            <fieldset>
-              <legend><%= type[0].toUpperCase() + type.slice(1) %></legend>
-              <div class="radios">
+            <fieldset class="form-part">
+              <legend class="bold"><%= type[0].toUpperCase() + type.slice(1) %></legend>
+              <div class="radios-checkboxes">
                 <% types[type].forEach((row) => { %>
                   <% if (row.checked) { %>
-                    <div class="radio">
+                    <div class="radio-checkbox">
                       <input type="checkbox" name="<%= type %>" id="<%= row.category %>" value="<%= row.id %>" checked>
                       <label for="<%= row.category %>"><%= row.category[0].toUpperCase() + row.category.slice(1) %></label>
                     </div>
                   <% } else { %>
-                    <div class="radio">
+                    <div class="radio-checkbox">
                       <input type="checkbox" name="<%= type %>" id="<%= row.category %>" value="<%= row.id %>">
                       <label for="<%= row.category %>"><%= row.category[0].toUpperCase() + row.category.slice(1) %></label>
                     </div>
@@ -52,7 +52,7 @@
             </fieldset>
           <% }) %>
           <div class="form-part">
-            <label for="password">Admin password:</label>
+            <label for="password" class="bold">Admin password:</label>
             <input type="password" name="password" id="password" required class="text-input">
           </div>
           <div>
