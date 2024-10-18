@@ -147,7 +147,16 @@ const getUpdateGame = [
     if (!errors.isEmpty()) throw new CustomError(errors.array[0].msg, 404);
 
     const game = await db.getGameById(req.params.id);
-    game.release_date = `${game.release_date.getFullYear()}-${game.release_date.getMonth() + 1}-${game.release_date.getDate()}`;
+    const year = game.release_date.getFullYear();
+    const month =
+      game.release_date.getMonth() + 1 < 10
+        ? "0" + (game.release_date.getMonth() + 1)
+        : game.release_date.getMonth() + 1;
+    const date =
+      game.release_date.getDate() < 10
+        ? "0" + game.release_date.getDate()
+        : game.release_date.getDate();
+    game.release_date = `${year}-${month}-${date}`;
 
     // Get types and set checked to true where we need to so we can show them in form
     const types = formatRelations(await db.getAllCategories());
