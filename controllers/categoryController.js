@@ -24,6 +24,19 @@ const validateCreateCategory = () => [
     .withMessage("Incorrect password."),
 ];
 
+const validateUpdateCategory = () => [
+  body("categoryName")
+    .custom((str) => /^[a-zA-Z0-9. -]+$/.test(str))
+    .withMessage(
+      "Category name must contain only alphanumerical characters, '.', '-' and spaces.",
+    )
+    .isLength({ min: 1, max: 30 })
+    .withMessage("Category name must contain between 1 and 30 characters"),
+  body("password")
+    .custom((password) => password === process.env.ADMIN_PASSWORD)
+    .withMessage("Incorrect password."),
+];
+
 const validateBodyPassword = () =>
   body("password")
     .custom((password) => password === process.env.ADMIN_PASSWORD)
@@ -91,16 +104,12 @@ const getUpdateCategory = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) throw new CustomError(errors.array()[0].msg, 400);
 
-    const types = await db.getAllTypesOfCategories();
     const category = await db.getCategoryById(req.params.id);
-
-    types.find((row) => row.type === category.type).checked = true;
 
     res.render("categoryForm", {
       action: "Update",
       href: `update/${req.params.id}`,
       links,
-      types,
       categoryName: category.category,
     });
   }),
@@ -114,30 +123,22 @@ const postUpdateCategory = [
 
     next();
   }),
-  validateCreateCategory(),
+  validateUpdateCategory(),
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const types = await db.getAllTypesOfCategories();
       const category = await db.getCategoryById(req.params.id);
-
-      types.find((row) => row.type === category.type).checked = true;
 
       res.status(400).render("categoryForm", {
         action: "Update",
         href: `update/${req.params.id}`,
         links,
-        types,
         categoryName: category.category,
         errors: errors.array(),
       });
     }
 
-    await db.updateCategory(
-      req.body.categoryName,
-      req.body.typeId,
-      Number(req.params.id),
-    );
+    await db.updateCategory(req.body.categoryName, Number(req.params.id));
     res.redirect("/categories");
   }),
 ];
