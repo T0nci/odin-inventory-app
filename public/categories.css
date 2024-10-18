@@ -110,3 +110,16 @@ input[type="password"]:focus {
   color: white;
   padding: 0.5rem 1rem;
 }
+
+@media (min-width: 400px) {
+  .types {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  .type {
+    width: 300px;
+  }
+}
