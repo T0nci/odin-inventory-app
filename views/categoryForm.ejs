@@ -19,24 +19,19 @@
             <label for="categoryName" class="bold">Category name:</label>
             <input type="text" name="categoryName" id="categoryName" autocomplete="off" autofocus required value="<%= locals.categoryName || '' %>" class="text-input">
           </div>
-          <fieldset class="form-part">
-            <legend class="bold">Type of category:</legend>
-            <div class="radios-checkboxes">
-              <% types.forEach((type) => { %>
-                <% if (type.checked) { %>
-                  <div class="radio-checkbox">
-                    <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required checked>
-                    <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
-                  </div>
-                <% } else { %>
-                  <div class="radio-checkbox">
-                    <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required>
-                    <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
-                  </div>
-                <% } %>
-              <% }) %>
-            </div>
-          </fieldset>
+          <% if (locals.types) { %>
+            <fieldset class="form-part">
+              <legend class="bold">Type of category:</legend>
+              <div class="radios-checkboxes">
+                <% types.forEach((type) => { %>
+                    <div class="radio-checkbox">
+                      <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required>
+                      <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
+                    </div>
+                <% }) %>
+              </div>
+            </fieldset>
+          <% } %>
           <div class="form-part">
             <label for="password" class="bold">Admin password:</label>
             <input type="password" name="password" id="password" required class="text-input">
