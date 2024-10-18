@@ -1,0 +1,49 @@
+.form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-part {
+  margin-bottom: 0.5rem;
+}
+
+.text-input {
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
+  border: none;
+  outline: 1px solid gray;
+}
+
+.text-input:focus {
+  outline: 1px solid blue;
+}
+
+.radios {
+  margin-top: 0.2rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radio {
+  display: flex;
+  align-items: start;
+  gap: 0.2rem;
+}
+
+.submit {
+  border-radius: 10px;
+  border: none;
+  width: fit-content;
+  margin: 0 auto;
+  font-weight: bold;
+  background-color: firebrick;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.submit:hover {
+  cursor: pointer;
+  background-color: red;
+}

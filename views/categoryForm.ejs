@@ -6,36 +6,43 @@
     <title><%= action %> Category - Inventory App</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="/categoryForm.css">
   </head>
   <body>
     <%- include("partials/navbar", { links }) %>
     <main>
       <div class="main">
         <header><%= action %> Category</header>
-        <form action="/categories/<%= href %>" method="POST">
+        <form action="/categories/<%= href %>" method="POST" class="form">
           <%- include("partials/errors", { errors: locals.errors }) %>
-          <div>
+          <div class="form-part">
             <label for="categoryName">Category name:</label>
-            <input type="text" name="categoryName" id="categoryName" autocomplete="off" autofocus required value="<%= locals.categoryName || '' %>">
+            <input type="text" name="categoryName" id="categoryName" autocomplete="off" autofocus required value="<%= locals.categoryName || '' %>" class="text-input">
           </div>
-          <fieldset>
+          <fieldset class="form-part">
             <legend>Type of category:</legend>
-            <% types.forEach((type) => { %>
-              <% if (type.checked) { %>
-                <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required checked>
-                <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
-              <% } else { %>
-                <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required>
-                <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
-              <% } %>
-            <% }) %>
+            <div class="radios">
+              <% types.forEach((type) => { %>
+                <% if (type.checked) { %>
+                  <div class="radio">
+                    <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required checked>
+                    <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
+                  </div>
+                <% } else { %>
+                  <div class="radio">
+                    <input type="radio" name="typeId" id="<%= type.id %>" value="<%= type.id %>" required>
+                    <label for="<%= type.id %>"><%= type.type[0].toUpperCase() + type.type.slice(1) %></label>
+                  </div>
+                <% } %>
+              <% }) %>
+            </div>
           </fieldset>
-          <div>
+          <div class="form-part">
             <label for="password">Admin password:</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" required class="text-input">
           </div>
           <div>
-            <button type="submit">Submit</button>
+            <button type="submit" class="submit">Submit</button>
           </div>
         </form>
       </div>
