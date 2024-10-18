@@ -1,0 +1,81 @@
+.general-info {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.heading {
+  font-size: 1.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.list {
+  margin-bottom: 1rem;
+}
+
+.list > li {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.link {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.link:link {
+  color: firebrick;
+}
+
+.link:visited {
+  color: firebrick;
+}
+
+.link:hover {
+  color: red;
+}
+
+.link:active {
+  color: darkred;
+}
+
+#password {
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
+  border: none;
+  outline: 1px solid gray;
+  width: 100%;
+  margin-bottom: 0.2rem;
+}
+
+#password:focus {
+  outline: 1px solid blue;
+}
+
+.delete {
+  border-radius: 10px;
+  border: none;
+  width: fit-content;
+  margin: 0 auto;
+  font-weight: bold;
+  background-color: firebrick;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.delete:hover {
+  cursor: pointer;
+  background-color: red;
+}
+
+@media (min-width: 400px) {
+  #password {
+    width: 200px;
+    display: inline-block;
+  }
+
+  .delete {
+    display: inline-block;
+    margin: 0;
+  }
+}

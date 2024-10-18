@@ -111,6 +111,11 @@ input[type="password"]:focus {
   padding: 0.5rem 1rem;
 }
 
+.delete:hover {
+  cursor: pointer;
+  background-color: red;
+}
+
 @media (min-width: 400px) {
   .types {
     flex-direction: row;

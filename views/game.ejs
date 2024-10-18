@@ -6,42 +6,39 @@
     <title><%= game.game %> - Inventory App</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="/game.css">
   </head>
   <body>
     <%- include("partials/navbar", { links }) %>
     <main>
       <div class="main">
-        <p><%= game.game %></p>
-        <p><%= game.price %>€</p>
-        <p><%= game.about %></p>
-        <p><%= game.release_date.toDateString().slice(4) %></p>
-        <ul>
-          <p>Genres:</p>
+        <header><%= game.game %></header>
+        <p class="general-info">Price: <%= game.price %>€</p>
+        <p class="general-info">About:<br><%= game.about %></p>
+        <p class="general-info">Release Date: <%= game.release_date.toDateString().slice(4) %></p>
+        <ul class="list">
+          <p class="heading">Genres:</p>
           <% game.genres.forEach((row) => { %>
             <li><%= row.category %></li>
           <% }) %>
         </ul>
-        <ul>
-          <p>Developers:</p>
+        <ul class="list">
+          <p class="heading">Developers:</p>
           <% game.developers.forEach((row) => { %>
             <li><%= row.category %></li>
           <% }) %>
         </ul>
-        <ul>
-          <p>Platforms:</p>
+        <ul class="list">
+          <p class="heading">Platforms:</p>
           <% game.platforms.forEach((row) => { %>
             <li><%= row.category %></li>
           <% }) %>
         </ul>
-        <a href="/games/update/<%= game.id %>">Update game</a>
+        <a href="/games/update/<%= game.id %>" class="link">Update game</a>
         <form action="/games/delete/<%= game.id %>" method="POST">
-          <div>
-            <label for="password">Admin password:</label>
-            <input type="password" name="password" id="password" required>
-          </div>
-          <div>
-            <button type="submit">Delete game</button>
-          </div>
+          <label for="password">Admin password:</label>
+          <input type="password" name="password" id="password" required>
+          <button type="submit" class="delete">Delete game</button>
         </form>
       </div>
     </main>
