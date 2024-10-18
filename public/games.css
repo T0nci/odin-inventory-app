@@ -1,0 +1,28 @@
+.create-game {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 2rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.create-game:link {
+  color: firebrick;
+}
+
+.create-game:visited {
+  color: firebrick;
+}
+
+.create-game:hover {
+  color: red;
+}
+
+.create-game:active {
+  color: darkred;
+}
+
+.genre-list {
+  display: flex;
+  gap: 0.5rem;
+}
