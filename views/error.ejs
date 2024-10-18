@@ -10,8 +10,10 @@
   <body>
     <%- include("partials/navbar", { links }) %>
     <main>
-      <header>Error</header>
-      <p><%= err.statusCode %>: <%= err.message %></p>
+      <div class="main">
+        <header>Error</header>
+        <p><%= err.statusCode %>: <%= err.message %></p>
+      </div>
     </main>
   </body>
 </html>

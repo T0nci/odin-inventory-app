@@ -11,28 +11,30 @@
   <body>
     <%- include("partials/navbar", { links }) %>
     <main>
-      <header>Home</header>
-      <p class="intro">
-        Welcome to Game Vault, your go-to hub for discovering and tracking video games! Our site offers a streamlined inventory filled with essential information about your favorite titles. Each entry includes the game title, price, a brief overview, release date, developer, genres, and platforms.
-      </p>
-      <p class="intro">
-        Whether you're hunting for the latest blockbuster or a hidden gem, Game Vault makes it easy to find what you need at a glance. Explore our collection to stay informed and make the best gaming choices! Join us as we celebrate the diverse world of video games, one title at a time. Happy gaming!
-      </p>
-      <div>
-        <h1 class="heading">New additions</h1>
-        <ul class="new-additions">
-          <% games.forEach((game) => { %>
-            <li>
-              <button onclick="location.href = '/games/game/<%= game.id %>'" class="game">
-                <p class="game-name"><%= game.game %></p>
-                <p>Price: <%= game.price %>€</p>
-                <p>Developer(s): <%= game.developersString %></p>
-                <p><%= game.genresString %></p>
-                <p><%= game.platformsString %></p>
-              </button>
-            </li>
-          <% }) %>
-        </ul>
+      <div class="main">
+        <header>Home</header>
+        <p class="intro">
+          Welcome to Game Vault, your go-to hub for discovering and tracking video games! Our site offers a streamlined inventory filled with essential information about your favorite titles. Each entry includes the game title, price, a brief overview, release date, developer, genres, and platforms.
+        </p>
+        <p class="intro">
+          Whether you're hunting for the latest blockbuster or a hidden gem, Game Vault makes it easy to find what you need at a glance. Explore our collection to stay informed and make the best gaming choices! Join us as we celebrate the diverse world of video games, one title at a time. Happy gaming!
+        </p>
+        <div>
+          <h1 class="heading">New additions</h1>
+          <ul class="new-additions">
+            <% games.forEach((game) => { %>
+              <li>
+                <button onclick="location.href = '/games/game/<%= game.id %>'" class="game">
+                  <p class="game-name"><%= game.game %></p>
+                  <p>Price: <%= game.price %>€</p>
+                  <p>Developer(s): <%= game.developersString %></p>
+                  <p><%= game.genresString %></p>
+                  <p><%= game.platformsString %></p>
+                </button>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
       </div>
     </main>
   </body>

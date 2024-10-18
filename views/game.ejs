@@ -10,38 +10,42 @@
   <body>
     <%- include("partials/navbar", { links }) %>
     <main>
-      <p><%= game.game %></p>
-      <p><%= game.price %>€</p>
-      <p><%= game.about %></p>
-      <p><%= game.release_date.toDateString().slice(4) %></p>
-      <ul>
-        <p>Genres:</p>
-        <% game.genres.forEach((row) => { %>
-          <li><%= row.category %></li>
-        <% }) %>
-      </ul>
-      <ul>
-        <p>Developers:</p>
-        <% game.developers.forEach((row) => { %>
-          <li><%= row.category %></li>
-        <% }) %>
-      </ul>
-      <ul>
-        <p>Platforms:</p>
-        <% game.platforms.forEach((row) => { %>
-          <li><%= row.category %></li>
-        <% }) %>
-      </ul>
-      <a href="/games/update/<%= game.id %>">Update game</a>
-      <form action="/games/delete/<%= game.id %>" method="POST">
-        <div>
-          <label for="password">Admin password:</label>
-          <input type="password" name="password" id="password" required>
-        </div>
-        <div>
-          <button type="submit">Delete game</button>
-        </div>
-      </form>
+      <div class="main">
+        <p><%= game.game %></p>
+        <p><%= game.price %>€</p>
+        <p><%= game.about %></p>
+        <p><%= game.release_date.toDateString().slice(4) %></p>
+        <ul>
+          <p>Genres:</p>
+          <% game.genres.forEach((row) => { %>
+            <li><%= row.category %></li>
+          <% }) %>
+        </ul>
+        <ul>
+          <p>Developers:</p>
+          <% game.developers.forEach((row) => { %>
+            <li><%= row.category %></li>
+          <% }) %>
+        </ul>
+        <ul>
+          <p>Platforms:</p>
+          <% game.platforms.forEach((row) => { %>
+            <li><%= row.category %></li>
+          <% }) %>
+        </ul>
+        <a href="/games/update/<%= game.id %>">Update game</a>
+        <form action="/games/delete/<%= game.id %>" method="POST">
+          <div>
+            <label for="password">Admin password:</label>
+            <input type="password" name="password" id="password" required>
+          </div>
+          <div>
+            <button type="submit">Delete game</button>
+          </div>
+        </form>
+      </div>iv>
+        </form>
+      </m>
     </main>
   </body>
 </html>

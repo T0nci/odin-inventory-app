@@ -10,51 +10,53 @@
   <body>
     <%- include("partials/navbar", { links }) %>
     <main>
-      <header><%= action %> Game</header>
-      <form action="/games/<%= href %>" method="POST">
-        <%- include("partials/errors", { errors: locals.errors }) %>
-        <div>
-          <label for="game">Game:</label>
-          <input type="text" name="game" id="game" autocomplete="off" value="<%= game.game || '' %>" autofocus required>
-        </div>
-        <div>
-          <label for="price">Price(in euros - €):</label>
-          <input type="tel" name="price" id="price" autocomplete="off" value="<%= game.price || '' %>" required>
-        </div>
-        <div>
-          <label for="releaseDate">Release Date:</label>
-          <input type="date" name="releaseDate" id="releaseDate" value="<%= game.release_date || '' %>" required>
-        </div>
-        <div>
-          <label for="about">About:</label>
-          <textarea name="about" id="about" required><%= game.about || '' %></textarea>
-        </div>
-        <% Object.keys(types).forEach((type) => { %>
-          <fieldset>
-            <legend><%= type[0].toUpperCase() + type.slice(1) %></legend>
-            <% types[type].forEach((row) => { %>
-              <% if (row.checked) { %>
-                <div>
-                  <input type="checkbox" name="<%= type %>" id="<%= row.category %>" value="<%= row.id %>" checked>
-                  <label for="<%= row.category %>"><%= row.category[0].toUpperCase() + row.category.slice(1) %></label>
-                </div>
-              <% } else { %>
-                <div>
-                  <input type="checkbox" name="<%= type %>" id="<%= row.category %>" value="<%= row.id %>">
-                  <label for="<%= row.category %>"><%= row.category[0].toUpperCase() + row.category.slice(1) %></label>
-                </div>
-              <% } %>
-            <% }) %>
-          </fieldset>
-        <% }) %>
-        <div>
-          <label for="password">Admin password:</label>
-          <input type="password" name="password" id="password" required>
-        </div>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+      <div class="main">
+        <header><%= action %> Game</header>
+        <form action="/games/<%= href %>" method="POST">
+          <%- include("partials/errors", { errors: locals.errors }) %>
+          <div>
+            <label for="game">Game:</label>
+            <input type="text" name="game" id="game" autocomplete="off" value="<%= game.game || '' %>" autofocus required>
+          </div>
+          <div>
+            <label for="price">Price(in euros - €):</label>
+            <input type="tel" name="price" id="price" autocomplete="off" value="<%= game.price || '' %>" required>
+          </div>
+          <div>
+            <label for="releaseDate">Release Date:</label>
+            <input type="date" name="releaseDate" id="releaseDate" value="<%= game.release_date || '' %>" required>
+          </div>
+          <div>
+            <label for="about">About:</label>
+            <textarea name="about" id="about" required><%= game.about || '' %></textarea>
+          </div>
+          <% Object.keys(types).forEach((type) => { %>
+            <fieldset>
+              <legend><%= type[0].toUpperCase() + type.slice(1) %></legend>
+              <% types[type].forEach((row) => { %>
+                <% if (row.checked) { %>
+                  <div>
+                    <input type="checkbox" name="<%= type %>" id="<%= row.category %>" value="<%= row.id %>" checked>
+                    <label for="<%= row.category %>"><%= row.category[0].toUpperCase() + row.category.slice(1) %></label>
+                  </div>
+                <% } else { %>
+                  <div>
+                    <input type="checkbox" name="<%= type %>" id="<%= row.category %>" value="<%= row.id %>">
+                    <label for="<%= row.category %>"><%= row.category[0].toUpperCase() + row.category.slice(1) %></label>
+                  </div>
+                <% } %>
+              <% }) %>
+            </fieldset>
+          <% }) %>
+          <div>
+            <label for="password">Admin password:</label>
+            <input type="password" name="password" id="password" required>
+          </div>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
     </main>
   </body>
 </html>

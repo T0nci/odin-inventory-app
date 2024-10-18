@@ -10,23 +10,25 @@
   <body>
     <%- include("partials/navbar", { links }) %>
     <main>
-      <header>Games<%= locals.filter && `, ${filter.type}: ${filter.category}` %></header>
-      <a href="/games/create">Create new game</a>
-      <ul>
-        <% games.forEach((game) => { %>
-          <li>
-            <button onclick="location.href = '/games/game/<%= game.id %>'">
-              <p><%= game.game %></p>
-              <p><%= game.price %>€</p>
-              <ul>
-                <% game.genres.forEach((genre) => { %>
-                  <li><%= genre %></li>
-                <% }) %>
-              </ul>
-            </button>
-          </li>
-        <% }) %>
-      </ul>
+      <div class="main">
+        <header>Games<%= locals.filter && `, ${filter.type}: ${filter.category}` %></header>
+        <a href="/games/create">Create new game</a>
+        <ul>
+          <% games.forEach((game) => { %>
+            <li>
+              <button onclick="location.href = '/games/game/<%= game.id %>'">
+                <p><%= game.game %></p>
+                <p><%= game.price %>€</p>
+                <ul>
+                  <% game.genres.forEach((genre) => { %>
+                    <li><%= genre %></li>
+                  <% }) %>
+                </ul>
+              </button>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
     </main>
   </body>
 </html>
