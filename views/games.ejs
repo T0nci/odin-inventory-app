@@ -6,6 +6,8 @@
     <title>Games - Inventory App</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/global.css">
+    <!-- <link rel="stylesheet" href=""> -->
+    <link rel="stylesheet" href="/gameList.css">
   </head>
   <body>
     <%- include("partials/navbar", { links }) %>
@@ -13,11 +15,11 @@
       <div class="main">
         <header>Games<%= locals.filter && `, ${filter.type}: ${filter.category}` %></header>
         <a href="/games/create">Create new game</a>
-        <ul>
+        <ul class="games">
           <% games.forEach((game) => { %>
             <li>
-              <button onclick="location.href = '/games/game/<%= game.id %>'">
-                <p><%= game.game %></p>
+              <button onclick="location.href = '/games/game/<%= game.id %>'" class="game">
+                <p class="game-name"><%= game.game %></p>
                 <p><%= game.price %>€</p>
                 <ul>
                   <% game.genres.forEach((genre) => { %>
