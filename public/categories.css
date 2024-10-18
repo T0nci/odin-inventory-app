@@ -1,0 +1,112 @@
+.new-category {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 2rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.new-category:link {
+  color: firebrick;
+}
+
+.new-category:visited {
+  color: firebrick;
+}
+
+.new-category:hover {
+  color: red;
+}
+
+.new-category:active {
+  color: darkred;
+}
+
+.types {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.type {
+  width: 100%;
+}
+
+.heading {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.category {
+  padding: 1rem;
+}
+
+.category:not(:first-of-type) {
+  border-top: 2px solid black;
+}
+
+.visit-category,
+.update-category {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 0.5rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.update-category {
+  font-size: 1rem;
+}
+
+.visit-category:link,
+.update-category:link {
+  color: firebrick;
+}
+
+.visit-category:visited,
+.update-category:visited {
+  color: firebrick;
+}
+
+.visit-category:hover,
+.update-category:hover {
+  color: red;
+}
+
+.visit-category:active,
+.update-category:active {
+  color: darkred;
+}
+
+.password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+input[type="password"] {
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
+  border: none;
+  outline: 1px solid gray;
+}
+
+input[type="password"]:focus {
+  outline: 1px solid blue;
+}
+
+.delete {
+  border-radius: 10px;
+  border: none;
+  width: fit-content;
+  margin: 0 auto;
+  font-weight: bold;
+  background-color: firebrick;
+  color: white;
+  padding: 0.5rem 1rem;
+}
