@@ -37,3 +37,23 @@
   font-weight: bold;
   font-size: 1.5rem;
 }
+
+@media (min-width: 400px) {
+  .intro {
+    width: 75ch;
+    margin: 0 auto;
+  }
+
+  .new-additions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .new-additions > li {
+    width: auto;
+  }
+
+  .game {
+    width: 320px;
+  }
+}
