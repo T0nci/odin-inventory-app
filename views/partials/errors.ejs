@@ -1,7 +1,7 @@
 <% if (errors) { %>
-  <ul>
+  <ul class="errors">
     <% errors.forEach((error) => { %>
-      <li><%= error.msg %></li>
+      <li class="error"><%= error.msg %></li>
     <% }) %>
   </ul>
 <% } %>

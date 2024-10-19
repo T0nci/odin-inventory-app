@@ -51,6 +51,18 @@ header {
   margin-bottom: 1rem;
 }
 
+.errors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  margin-bottom: 0.5rem;
+}
+
+.error {
+  color: red;
+}
+
 @media (min-width: 400px) {
   .nav-link {
     padding: 0.2rem;
