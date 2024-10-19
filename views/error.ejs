@@ -6,13 +6,14 @@
     <title>Error - Inventory App</title>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="/error.css">
   </head>
   <body>
     <%- include("partials/navbar", { links }) %>
     <main>
       <div class="main">
         <header>Error</header>
-        <p><%= err.statusCode %>: <%= err.message %></p>
+        <p class="error-paragraph"><%= err.statusCode %>: <%= err.message %></p>
       </div>
     </main>
   </body>
